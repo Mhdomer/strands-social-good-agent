@@ -41,23 +41,23 @@ async def main():
             await page.goto("http://localhost:8000")
             await page.wait_for_timeout(1000)
 
-            # 1. Capture Dashboard Overview (Arabic)
-            print("Capturing 01_dashboard_overview.png...")
+            # 1. Capture Dashboard Overview (English Default)
+            print("Capturing 01_dashboard_overview.png (English Default)...")
             await page.screenshot(path=str(SCREENSHOTS_DIR / "01_dashboard_overview.png"))
 
-            # 2. Trigger Scenario 1: Riyadh Heatwave Worker
-            print("Simulating Scenario 1 (Riyadh Heatwave)...")
+            # 2. Trigger Scenario 1: Riyadh Heatwave Worker (English)
+            print("Simulating Scenario 1: Riyadh Heatwave Laborer (English)...")
             await page.click('button[onclick="runPreset(1)"]')
             try:
                 await page.wait_for_selector("#active-loading-row", state="detached", timeout=45000)
             except Exception as e:
                 print(f"Warning on scenario 1 wait: {e}")
                 await page.wait_for_timeout(10000)
-            await page.wait_for_timeout(1500)
+            await page.wait_for_timeout(2000)
             await page.screenshot(path=str(SCREENSHOTS_DIR / "02_heatwave_worker.png"))
 
-            # 3. Trigger Scenario 2: Asthmatic Child Brufen Check
-            print("Simulating Scenario 2 (Asthmatic Child Brufen Check)...")
+            # 3. Trigger Scenario 2: Asthmatic Child Brufen Check (English)
+            print("Simulating Scenario 2: Asthmatic Child NSAID Interception (English)...")
             await page.reload()
             await page.wait_for_timeout(1000)
             await page.click('button[onclick="runPreset(2)"]')
@@ -66,11 +66,11 @@ async def main():
             except Exception as e:
                 print(f"Warning on scenario 2 wait: {e}")
                 await page.wait_for_timeout(10000)
-            await page.wait_for_timeout(1500)
+            await page.wait_for_timeout(2000)
             await page.screenshot(path=str(SCREENSHOTS_DIR / "03_contraindication_interception.png"))
 
-            # 4. Trigger Scenario 3: Emergency Cyanosis Dispatch
-            print("Simulating Scenario 3 (Cyanosis Red-Flag Alarm)...")
+            # 4. Trigger Scenario 3: Emergency Cyanosis Dispatch (English)
+            print("Simulating Scenario 3: Cyanosis Red-Flag Alarm (English)...")
             await page.reload()
             await page.wait_for_timeout(1000)
             await page.click('button[onclick="runPreset(3)"]')
@@ -79,34 +79,47 @@ async def main():
             except Exception as e:
                 print(f"Warning on scenario 3 wait: {e}")
                 await page.wait_for_timeout(3000)
-            await page.wait_for_timeout(1500)
+            await page.wait_for_timeout(2000)
             await page.screenshot(path=str(SCREENSHOTS_DIR / "04_emergency_cyanosis_dispatch.png"))
 
-            # 5. Switch to English and capture English Mode Overview
-            print("Switching to English Mode...")
-            await page.reload()
-            await page.wait_for_timeout(800)
+            # 5. Interactive Drug Checker (English)
+            print("Testing Interactive Drug Shield Widget...")
+            await page.click("span.drug-tag:has-text('Brufen')")
+            await page.wait_for_timeout(1500)
+
+            # 6. Switch to Arabic localization demo
+            print("Demonstrating Arabic RTL toggle...")
             await page.click("#lang-btn")
             await page.wait_for_timeout(1000)
-            print("Capturing 05_english_dashboard_view.png...")
-            await page.screenshot(path=str(SCREENSHOTS_DIR / "05_english_dashboard_view.png"))
+            print("Capturing 05_arabic_dashboard_view.png...")
+            await page.screenshot(path=str(SCREENSHOTS_DIR / "05_arabic_dashboard_view.png"))
 
             await page.wait_for_timeout(1500)
             await context.close()
             await browser.close()
             print("Playwright session complete.")
 
-        # Convert webm video to mp4 using ffmpeg
+        # Convert webm video to mp4 with English narration if available
         video_files = list(VIDEOS_DIR.glob("*.webm"))
         if video_files:
             latest_video = max(video_files, key=os.path.getctime)
             output_mp4 = VIDEOS_DIR / "nafas_demo_walkthrough.mp4"
+            narration_audio = VIDEOS_DIR / "narration_full.mp3"
             print(f"Converting {latest_video} to {output_mp4} via ffmpeg...")
-            subprocess.run([
-                "ffmpeg", "-y", "-i", str(latest_video),
-                "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                "-r", "30", str(output_mp4)
-            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if narration_audio.exists():
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(latest_video),
+                    "-i", str(narration_audio),
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "192k",
+                    "-r", "30", str(output_mp4)
+                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            else:
+                subprocess.run([
+                    "ffmpeg", "-y", "-i", str(latest_video),
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                    "-r", "30", str(output_mp4)
+                ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             print(f"MP4 demo video generated successfully: {output_mp4}")
 
     finally:

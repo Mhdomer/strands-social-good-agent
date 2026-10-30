@@ -75,10 +75,10 @@ In Arabic, *Nafas* (نَفَس) means breath, relief, and breathing room. This p
 Nafas provides a high-contrast web dashboard engineered for field readability under bright outdoor sunlight:
 
 ### 1. Dashboard Overview & Real-Time Telemetry
-| Arabic Primary Interface (RTL) | English Migrant Worker Mode (LTR) |
+| English Primary Interface (LTR) | Arabic Regional Localization Toggle (RTL) |
 | :---: | :---: |
-| ![Nafas Dashboard Arabic](docs/images/01_dashboard_overview.png) | ![Nafas Dashboard English](docs/images/05_english_dashboard_view.png) |
-| *Arabic RTL interface with IBM Plex Sans Arabic, live WBGT telemetry, and quick field presets.* | *English LTR toggle with Inter typography, designed for multinational migrant workforce accessibility.* |
+| ![Nafas Dashboard English](docs/images/01_dashboard_overview.png) | ![Nafas Dashboard Arabic](docs/images/05_arabic_dashboard_view.png) |
+| *High-contrast English interface with Inter typography, live WBGT telemetry, and quick field presets.* | *Full Arabic RTL localization with IBM Plex Sans Arabic, emergency hotlines, and regional dialects.* |
 
 ### 2. Live Field Scenarios
 | Scenario 1: Riyadh Outdoor Laborer (46.5°C Heatwave) | Scenario 2: Asthmatic Child (Lethal NSAID Interception) |
