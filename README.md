@@ -4,6 +4,10 @@ An environmental health and respiratory safety AI agent built for the AWS Builde
 
 Built by Mohamed Makhlouf (Omar) using the **AWS Strands Agents SDK** on **Amazon Bedrock** to protect vulnerable outdoor laborers, asthmatic children, and underserved communities across arid and high-heat urban environments (Saudi Arabia and Egypt).
 
+[![Watch Demo Video on YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red?style=for-the-badge&logo=youtube)](https://youtu.be/ftLuHs6JTMU)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![Tests: 46 Passed](https://img.shields.io/badge/pytest-46%20passed-brightgreen.svg?style=for-the-badge)](tests/)
+
 ---
 
 ## 1. Challenge & Vision Overview
