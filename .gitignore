@@ -52,5 +52,7 @@ scratch/
 .nafas_sessions/
 .workshop_ref/
 docs/videos/*.webm
+docs/videos/*.mp3
+docs/videos/audio_clips/
 docs/BUILDER_CENTER_ARTICLE.md
 docs/VIDEO_SCRIPT.md
