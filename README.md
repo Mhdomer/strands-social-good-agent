@@ -120,15 +120,6 @@ Nafas provides a high-contrast web dashboard engineered for field readability un
 
 ```
 strands-social-good-agent/
-├── .agents/
-│   ├── AGENTS.md                  # Master project context, persona details, and router
-│   ├── rules/
-│   │   ├── non_ai_slop.md         # Zero corporate fluff, human commits, no em dashes
-│   │   └── strands_hackathon_invariants.md  # 4x25% rubric gates, workshop pass/fail rule
-│   └── skills/
-│       ├── strands-sdk-craft/     # Technical manual for tools, hooks, steering, swarms, evals
-│       ├── social-impact-architect/ # Persona details, climate-health metrics, competitive strategy
-│       └── hackathon-submission/  # Submission checklist, Builder Center template, video storyboard
 ├── src/
 │   └── nafas/
 │       ├── __init__.py
@@ -151,20 +142,27 @@ strands-social-good-agent/
 │       │   ├── audit_agent.py     # SafetyAuditor verification agent
 │       │   ├── supervisor.py      # Supervisor triage agent & NafasOrchestrator
 │       │   └── swarm.py           # Multi-agent collaborative swarm
-│       └── runtime/
-│           ├── bedrock_config.py  # Amazon Bedrock Claude 3.5 Sonnet / Haiku factory
-│           └── lambda_handler.py  # Serverless AWS Lambda and AgentCore entry point
+│       ├── runtime/
+│       │   ├── bedrock_config.py  # Amazon Bedrock Nova Pro / Nova Lite factory
+│       │   └── lambda_handler.py  # Serverless AWS Lambda and AgentCore entry point
+│       └── ui/
+│           ├── server.py          # Starlette web backend with concurrent query serialization
+│           └── static/index.html  # High-contrast bilingual dashboard (Arabic RTL & English LTR)
 ├── tests/
 │   ├── test_tools.py              # 18 unit tests for environmental, medication, shelter tools
 │   ├── test_hooks.py              # 7 unit tests for rate limiter and PII masking
 │   ├── test_steering.py           # 8 unit tests for clinical invariants and emergency filters
 │   ├── test_session.py            # 5 unit tests for patient profile baseline persistence
 │   └── test_swarm_trajectories.py # 8 trajectory tests with mock model evals & Lambda handler
+├── docs/
+│   ├── images/                    # UI screenshots (01 to 05) across scenarios & languages
+│   └── videos/                    # Automated MP4 demo walkthrough
+├── scripts/
+│   └── capture_ui.py              # Playwright headless browser test & demo video recorder
 ├── demo.py                        # Interactive CLI demonstrating 4 realistic field scenarios
 ├── pyproject.toml                 # Modern packaging with strands-agents and dependencies
-├── CLAUDE.md                      # Development and context guide
 ├── LICENSE                        # MIT License
-└── README.md                      # This project manifesto
+└── README.md                      # Project documentation and architectural guide
 ```
 
 ---
