@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نَفَس (Nafas) | Climate-Respiratory AI Guardian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b12;
+      --surface: #0f172a;
+      --surface-elevated: #1e293b;
+      --border: #243248;
+      --border-subtle: #1e293b;
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --teal: #0d9488;
+      --teal-hover: #0f766e;
+      --teal-surface: rgba(13, 148, 136, 0.12);
+      
+      --red: #dc2626;
+      --red-surface: rgba(220, 38, 38, 0.12);
+      
+      --amber: #d97706;
+      --amber-surface: rgba(217, 119, 6, 0.12);
+      
+      --blue: #2563eb;
+      --blue-surface: rgba(37, 99, 235, 0.12);
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+
+      --font-ar: 'IBM Plex Sans Arabic', -apple-system, sans-serif;
+      --font-en: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html[dir="rtl"] body { font-family: var(--font-ar); }
+    html[dir="ltr"] body { font-family: var(--font-en); }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Command Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--teal);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+    }
+    .brand-tag {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Runtime telemetry pill */
+    .telemetry-pill {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .dot-active {
+      width: 7px;
+      height: 7px;
+      background: #38bdf8;
+      border-radius: 50%;
+    }
+
+    /* Language Switcher Button */
+    .lang-toggle-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+    .lang-toggle-btn:hover {
+      border-color: var(--teal);
+      background: #243248;
+    }
+
+    /* Emergency Hotlines Strip */
+    .emergency-strip {
+      background: #181028;
+      border-bottom: 1px solid #332050;
+      padding: 0.45rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .hotline-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .hotline-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #cbd5e1;
+    }
+    .hotline-chip {
+      background: var(--red);
+      color: white;
+      font-weight: 700;
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+    .hotline-chip.health {
+      background: #0284c7;
+    }
+
+    /* Main Workspace Layout */
+    .workspace {
+      max-width: 1440px;
+      margin: 1.25rem auto;
+      padding: 0 1.25rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 1.25rem;
+      flex: 1;
+    }
+
+    @media (max-width: 1080px) {
+      .workspace { grid-template-columns: 1fr; }
+    }
+
+    /* Panels & Cards */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .panel-header {
+      padding: 0.85rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0b1220;
+    }
+    .panel-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .panel-body {
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* City Selector Tabs */
+    .city-tabs {
+      display: flex;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 2px;
+      gap: 2px;
+    }
+    .city-tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.4rem 0.2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      border: none;
+      background: transparent;
+      transition: all 0.15s;
+    }
+    .city-tab.active {
+      background: var(--surface-elevated);
+      color: white;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    /* Vitals Grid */
+    .vitals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+    .vital-cell {
+      background: #0b1220;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+    }
+    .vital-value {
+      font-size: 1.35rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #38bdf8;
+      line-height: 1.2;
+    }
+    .vital-value.danger { color: #f87171; }
+    .vital-value.warning { color: #fbbf24; }
+    .vital-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+
+    /* Hazard Alert Banner */
+    .hazard-banner {
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.95rem;
+      font-size: 0.82rem;
+      border: 1px solid transparent;
+      display: flex;
+      gap: 0.6rem;
+    }
+    .hazard-banner.extreme {
+      background: var(--red-surface);
+      border-color: rgba(220, 38, 38, 0.4);
+      color: #fca5a5;
+    }
+    .hazard-banner.moderate {
+      background: var(--amber-surface);
+      border-color: rgba(217, 119, 6, 0.4);
+      color: #fde68a;
+    }
+    .hazard-banner.safe {
+      background: var(--teal-surface);
+      border-color: rgba(13, 148, 136, 0.4);
+      color: #a7f3d0;
+    }
+
+    /* Interactive Drug Search Input */
+    .drug-checker-box {
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem;
+    }
+    .search-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+    .search-input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--teal); }
+    .search-btn {
+      background: var(--teal);
+      border: none;
+      color: white;
+      padding: 0 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .quick-drugs {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .drug-tag {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-en);
+    }
+    .drug-tag:hover { color: white; border-color: var(--teal); }
+    .drug-tag.danger { color: #f87171; border-color: rgba(248, 113, 113, 0.4); }
+
+    .drug-result-card {
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      margin-top: 0.65rem;
+      display: none;
+    }
+
+    /* Scenario Quick-Launch Buttons */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .scenario-card {
+      background: #0b1220;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.75rem;
+      cursor: pointer;
+      text-align: inherit;
+      color: inherit;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .scenario-card:hover {
+      background: var(--surface-elevated);
+      border-color: var(--teal);
+      transform: translateY(-1px);
+    }
+    .scenario-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .scenario-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Chat Section */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 720px;
+    }
+    .chat-top-controls {
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0b1220;
+      gap: 0.75rem;
+    }
+
+    .dialect-select {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    .swarm-stage-bar {
+      display: flex;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+    }
+    .stage-chip {
+      background: #111e33;
+      color: #64748b;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #1e293b;
+    }
+    .stage-chip.active {
+      color: var(--teal);
+      border-color: var(--teal);
+      background: var(--teal-surface);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      scroll-behavior: smooth;
+    }
+
+    /* Message Bubbles */
+    .message-row {
+      display: flex;
+      flex-direction: column;
+      max-width: 88%;
+    }
+    .message-row.user {
+      align-self: flex-start;
+    }
+    html[dir="rtl"] .message-row.user { align-self: flex-start; }
+    html[dir="rtl"] .message-row.agent { align-self: flex-end; }
+    html[dir="ltr"] .message-row.user { align-self: flex-start; }
+    html[dir="ltr"] .message-row.agent { align-self: flex-end; }
+
+    .msg-header {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .msg-bubble {
+      padding: 0.95rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .message-row.user .msg-bubble {
+      background: #16263e;
+      border: 1px solid #243b5e;
+      color: #f1f5f9;
+    }
+    .message-row.agent .msg-bubble {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: #f8fafc;
+    }
+    .message-row.emergency .msg-bubble {
+      background: var(--red-surface);
+      border: 1px solid var(--red);
+      color: #fee2e2;
+    }
+
+    /* Markdown Formatted Elements */
+    .msg-bubble h3 { font-size: 1rem; margin: 0.5rem 0 0.35rem; color: #38bdf8; }
+    .msg-bubble strong { color: white; font-weight: 600; }
+    .msg-bubble ul, .msg-bubble ol { margin: 0.45rem 0; padding-right: 1.4rem; }
+    html[dir="ltr"] .msg-bubble ul, html[dir="ltr"] .msg-bubble ol { padding-right: 0; padding-left: 1.4rem; }
+    .msg-bubble li { margin-bottom: 0.3rem; }
+    .msg-bubble p { margin-bottom: 0.45rem; }
+    .msg-bubble p:last-child { margin-bottom: 0; }
+
+    /* Input Bar */
+    .chat-compose-bar {
+      padding: 0.85rem 1.15rem;
+      border-top: 1px solid var(--border);
+      background: #0b1220;
+      display: flex;
+      gap: 0.65rem;
+    }
+    .chat-textarea {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      outline: none;
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+    }
+    .chat-textarea:focus { border-color: var(--teal); }
+    .send-action-btn {
+      background: var(--teal);
+      border: none;
+      color: white;
+      padding: 0 1.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.15s;
+    }
+    .send-action-btn:hover { background: var(--teal-hover); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-en);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Command Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-mark">ن</div>
+      <div>
+        <div class="brand-name">
+          <span data-i18n="brand_title">نَفَس (Nafas)</span>
+        </div>
+        <div class="brand-tag" data-i18n="brand_tag">Climate-Respiratory & Heat Stress AI Guardian</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="telemetry-pill">
+        <div class="dot-active"></div>
+        <span>Amazon Bedrock • Nova Pro • us-east-1</span>
+      </div>
+
+      <!-- Language Toggle Button -->
+      <button id="lang-btn" class="lang-toggle-btn" onclick="toggleLanguage()">
+        <span>🌐</span>
+        <span id="lang-btn-text">English</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Emergency Hotlines Strip -->
+  <div class="emergency-strip">
+    <div class="hotline-group">
+      <div class="hotline-item">
+        <span data-i18n="hotline_sa_redcrescent">🚨 طوارئ الهلال الأحمر السعودي:</span>
+        <span class="hotline-chip">997</span>
+      </div>
+      <div class="hotline-item">
+        <span data-i18n="hotline_sa_health">🏥 استشارات صحتي (السعودية):</span>
+        <span class="hotline-chip health">937</span>
+      </div>
+      <div class="hotline-item">
+        <span data-i18n="hotline_eg_ambulance">🚑 الإسعاف المصري:</span>
+        <span class="hotline-chip">123</span>
+      </div>
+      <div class="hotline-item">
+        <span data-i18n="hotline_eg_health">طوارئ الرعاية العاجلة (مصر):</span>
+        <span class="hotline-chip health">137</span>
+      </div>
+    </div>
+    <div style="font-family: var(--font-mono); color: var(--text-muted); font-size: 0.75rem;">
+      FAIL-CLOSED SAFETY ACTIVE
+    </div>
+  </div>
+
+  <!-- Main Workspace -->
+  <div class="workspace">
+
+    <!-- Left Controls Panel -->
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      
+      <!-- Scenario Quick Presets -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>⚡</span>
+            <span data-i18n="presets_title">سيناريوهات الفحص الميداني</span>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">Automated Evals</span>
+        </div>
+        <div class="panel-body">
+          <div class="scenario-grid">
+            <button class="scenario-card" onclick="runPreset(1)">
+              <div class="scenario-title">
+                <span>👷</span>
+                <span data-i18n="p1_title">عامل بناء بالرياض</span>
+              </div>
+              <div class="scenario-sub" data-i18n="p1_sub">حرارة 46.5°C • حظر الظهيرة</div>
+            </button>
+
+            <button class="scenario-card" onclick="runPreset(2)">
+              <div class="scenario-title">
+                <span>🧒</span>
+                <span data-i18n="p2_title">طفل ربو بالقاهرة</span>
+              </div>
+              <div class="scenario-sub" data-i18n="p2_sub">فحص حرارة بروفين / أسبرين</div>
+            </button>
+
+            <button class="scenario-card" onclick="runPreset(3)">
+              <div class="scenario-title">
+                <span>🚨</span>
+                <span data-i18n="p3_title">طوارئ زرقة الشفاه</span>
+              </div>
+              <div class="scenario-sub" data-i18n="p3_sub">إنذار إسعاف فوري (997/123)</div>
+            </button>
+
+            <button class="scenario-card" onclick="runPreset(4)">
+              <div class="scenario-title">
+                <span>💨</span>
+                <span data-i18n="p4_title">استنشاق بولميكورت</span>
+              </div>
+              <div class="scenario-sub" data-i18n="p4_sub">تعليمات المضمضة وحماية الفم</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Environmental Hazard Radar -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>🌡️</span>
+            <span data-i18n="hazard_title">رادار المناخ وإجهاد الحرارة (WBGT)</span>
+          </div>
+          <div id="city-badge" style="font-size: 0.78rem; color: #38bdf8; font-family: var(--font-mono);">Riyadh</div>
+        </div>
+        <div class="panel-body">
+          
+          <!-- City Switcher Tabs -->
+          <div class="city-tabs">
+            <button class="city-tab active" onclick="switchCity('riyadh')">الرياض</button>
+            <button class="city-tab" onclick="switchCity('cairo')">القاهرة</button>
+            <button class="city-tab" onclick="switchCity('jeddah')">جدة</button>
+            <button class="city-tab" onclick="switchCity('dammam')">الدمام</button>
+            <button class="city-tab" onclick="switchCity('alexandria')">الإسكندرية</button>
+          </div>
+
+          <!-- Vitals Matrix -->
+          <div class="vitals-grid">
+            <div class="vital-cell">
+              <div id="v-temp" class="vital-value">46.5°</div>
+              <div class="vital-label" data-i18n="vital_ambient">الحرارة المحسوسة</div>
+            </div>
+            <div class="vital-cell">
+              <div id="v-wbgt" class="vital-value danger">33.4°</div>
+              <div class="vital-label" data-i18n="vital_wbgt">مؤشر WBGT الحراري</div>
+            </div>
+            <div class="vital-cell">
+              <div id="v-hydration" class="vital-value">1.0 L</div>
+              <div class="vital-label" data-i18n="vital_hydration">الماء / ساعة</div>
+            </div>
+          </div>
+
+          <!-- Active Hazard Banner -->
+          <div id="v-banner" class="hazard-banner extreme">
+            <span>⚠️</span>
+            <div id="v-banner-text" data-i18n="hazard_extreme_desc">
+              <strong>إنذار حراري شديد الخطورة:</strong> مؤشر الإجهاد الحراري يتجاوز 32.2°C. يجب إيقاف الأعمال اليدوية الشاقة تحت أشعة الشمس فوراً، وتفعيل قرار حظر العمل وقت الظهيرة.
+            </div>
+          </div>
+
+          <!-- Nearest Shelters Preview -->
+          <div style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">
+            <strong style="color: white;" data-i18n="shelter_nearest">أقرب مركز رعاية مجهز:</strong>
+            <div id="v-shelter-name" style="color: #38bdf8; margin-top: 0.2rem;">مركز الرعاية الصحية الأولية بالبطحاء (24/7)</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Clinical Medication & Contraindication Shield -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span>🛡️</span>
+            <span data-i18n="shield_title">درع موانع أدوية الجهاز التنفسي</span>
+          </div>
+          <span style="font-size: 0.72rem; color: #f87171; font-family: var(--font-mono);">AERD Guard</span>
+        </div>
+        <div class="panel-body">
+          <div class="drug-checker-box">
+            <div class="search-row">
+              <input id="drug-input" class="search-input" type="text" placeholder="فحص دواء (مثال: بروفين، أسبرين، فنتولين)..." onkeydown="if(event.key==='Enter') verifyDrug()">
+              <button class="search-btn" onclick="verifyDrug()" data-i18n="check_btn">فحص</button>
+            </div>
+            <div class="quick-drugs">
+              <span class="drug-tag danger" onclick="quickCheck('Brufen')">Brufen (بروفين)</span>
+              <span class="drug-tag danger" onclick="quickCheck('Aspirin')">Aspirin (أسبرين)</span>
+              <span class="drug-tag" onclick="quickCheck('Ventolin')">Ventolin (فنتولين)</span>
+              <span class="drug-tag" onclick="quickCheck('Pulmicort')">Pulmicort (بولميكورت)</span>
+            </div>
+
+            <!-- Drug Result Card -->
+            <div id="drug-result" class="drug-result-card"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Chat & Multi-Agent Swarm Panel -->
+    <div class="panel chat-container">
+      
+      <!-- Chat Controls Bar -->
+      <div class="chat-top-controls">
+        <div class="swarm-stage-bar">
+          <span id="stage-supervisor" class="stage-chip active">SUPERVISOR</span>
+          <span id="stage-climate" class="stage-chip">CLIMATE</span>
+          <span id="stage-clinical" class="stage-chip">CLINICAL</span>
+          <span id="stage-auditor" class="stage-chip">AUDITOR</span>
+        </div>
+
+        <select id="dialect-selector" class="dialect-select">
+          <option value="saudi">🇸🇦 لهجة سعودية (نجدي / حجازي)</option>
+          <option value="egyptian">🇪🇬 عامية مصرية (مبسطة)</option>
+          <option value="english_worker">🌐 Worker English (Accessible)</option>
+        </select>
+      </div>
+
+      <!-- Messages Stream -->
+      <div id="chat-messages" class="chat-messages">
+        <!-- Initial Agent Message -->
+        <div class="message-row agent">
+          <div class="msg-header">
+            <span>🤖</span>
+            <span>NAFAS SUPERVISOR TRIAGE • STRANDS SDK</span>
+          </div>
+          <div class="msg-bubble" data-i18n="welcome_msg">
+            أهلاً بك يا غالي في <strong>نَفَس</strong>. أنا حارسك الصحي والبيئي المدعوم بنموذج <strong>Amazon Bedrock (Nova Pro)</strong> وسرب وكلاء <strong>Strands SDK</strong> لحمايتك من مخاطر لهيب الشمس، العواصف الترابية، وأخطاء أدوية وبخاخات الربو. تفضل بسؤالك وسأساعدك فوراً.
+          </div>
+        </div>
+      </div>
+
+      <!-- Compose Bar -->
+      <div class="chat-compose-bar">
+        <textarea id="user-input" class="chat-textarea" rows="1" placeholder="اكتب استفسارك هنا (مثال: هل أقدر أشتغل في شمس الرياض الحين؟)..." onkeydown="handleTextareaKey(event)"></textarea>
+        <button id="send-btn" class="send-action-btn" onclick="sendMessage()">
+          <span data-i18n="send_btn">إرسال</span>
+          <span>↵</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    Nafas (نَفَس) • AWS Strands SDK Workshop to Ship • Cloud DevSecOps & AI Security • Mohamed Makhlouf (Omar) • MIT License
+  </footer>
+
+  <script>
+    // --- Bilingual Translation Dictionary (i18n) ---
+    const I18N = {
+      ar: {
+        brand_title: "نَفَس (Nafas)",
+        brand_tag: "حارس المناخ والجهاز التنفسي الذكي",
+        hotline_sa_redcrescent: "🚨 طوارئ الهلال الأحمر السعودي:",
+        hotline_sa_health: "🏥 استشارات صحتي (السعودية):",
+        hotline_eg_ambulance: "🚑 الإسعاف المصري:",
+        hotline_eg_health: "طوارئ الرعاية العاجلة (مصر):",
+        presets_title: "سيناريوهات الفحص الميداني",
+        p1_title: "عامل بناء بالرياض",
+        p1_sub: "حرارة 46.5°C • حظر الظهيرة",
+        p2_title: "طفل ربو بالقاهرة",
+        p2_sub: "فحص حرارة بروفين / أسبرين",
+        p3_title: "طوارئ زرقة الشفاه",
+        p3_sub: "إنذار إسعاف فوري (997/123)",
+        p4_title: "استنشاق بولميكورت",
+        p4_sub: "تعليمات المضمضة وحماية الفم",
+        hazard_title: "رادار المناخ وإجهاد الحرارة (WBGT)",
+        vital_ambient: "الحرارة المحسوسة",
+        vital_wbgt: "مؤشر WBGT الحراري",
+        vital_hydration: "الماء / ساعة",
+        hazard_extreme_desc: "<strong>إنذار حراري شديد الخطورة:</strong> مؤشر الإجهاد الحراري يتجاوز 32.2°C. يجب إيقاف الأعمال اليدوية الشاقة تحت أشعة الشمس فوراً، وتفعيل قرار حظر العمل وقت الظهيرة.",
+        shelter_nearest: "أقرب مركز رعاية مجهز:",
+        shield_title: "درع موانع أدوية الجهاز التنفسي",
+        check_btn: "فحص",
+        send_btn: "إرسال",
+        input_placeholder: "اكتب استفسارك هنا (مثال: هل أقدر أشتغل في شمس الرياض الحين؟)...",
+        drug_placeholder: "فحص دواء (مثال: بروفين، أسبرين، فنتولين)...",
+        welcome_msg: "أهلاً بك يا غالي في <strong>نَفَس</strong>. أنا حارسك الصحي والبيئي المدعوم بنموذج <strong>Amazon Bedrock (Nova Pro)</strong> وسرب وكلاء <strong>Strands SDK</strong> لحمايتك من مخاطر لهيب الشمس، العواصف الترابية، وأخطاء أدوية وبخاخات الربو. تفضل بسؤالك وسأساعدك فوراً."
+      },
+      en: {
+        brand_title: "Nafas (نَفَس)",
+        brand_tag: "Climate-Respiratory & Heat Stress AI Guardian",
+        hotline_sa_redcrescent: "🚨 Saudi Red Crescent EMS:",
+        hotline_sa_health: "🏥 Saudi Health Line (Sehaty):",
+        hotline_eg_ambulance: "🚑 Egyptian Ambulance:",
+        hotline_eg_health: "Urgent Medical Hotline (Egypt):",
+        presets_title: "Field Diagnostic Presets",
+        p1_title: "Riyadh Laborer (46.5°C)",
+        p1_sub: "Extreme Heat & Midday Ban",
+        p2_title: "Cairo Child Asthma",
+        p2_sub: "Ibuprofen / Aspirin Screen",
+        p3_title: "Acute Cyanosis Alarm",
+        p3_sub: "Instant 997 / 123 Dispatch",
+        p4_title: "Pulmicort Steroid Inhaler",
+        p4_sub: "Oral Rinse & Spacer Hygiene",
+        hazard_title: "Climate Radar & Heat Stress (WBGT)",
+        vital_ambient: "Ambient Temp",
+        vital_wbgt: "WBGT Index",
+        vital_hydration: "Hydration / hr",
+        hazard_extreme_desc: "<strong>EXTREME HEAT STRESS ALERT:</strong> WBGT exceeds 32.2°C. Heavy physical outdoor labor must cease immediately. Saudi Midday Work Ban is active.",
+        shelter_nearest: "Nearest Equipped Medical Shelter:",
+        shield_title: "Respiratory Medication Safety Shield",
+        check_btn: "Verify",
+        send_btn: "Send",
+        input_placeholder: "Type your query here (e.g. Can I work under direct Riyadh sun right now?)...",
+        drug_placeholder: "Screen medication (e.g. Brufen, Aspirin, Ventolin)...",
+        welcome_msg: "Welcome to <strong>Nafas (نَفَس)</strong>. I am your environmental and respiratory safety guardian powered by <strong>Amazon Bedrock (Nova Pro)</strong> and the <strong>AWS Strands Agents SDK</strong>. I protect outdoor laborers and asthmatic patients from lethal heat stress, dust storms, and dangerous medication errors. How can I assist you today?"
+      }
+    };
+
+    let currentLang = 'ar';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const html = document.documentElement;
+      
+      html.setAttribute('lang', currentLang);
+      html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+      // Update button text
+      document.getElementById('lang-btn-text').innerText = currentLang === 'ar' ? 'English' : 'العربية';
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[currentLang][key]) {
+          el.innerHTML = I18N[currentLang][key];
+        }
+      });
+
+      // Update placeholders
+      document.getElementById('user-input').placeholder = I18N[currentLang].input_placeholder;
+      document.getElementById('drug-input').placeholder = I18N[currentLang].drug_placeholder;
+
+      // Adjust dialect selector default
+      const dialectSelect = document.getElementById('dialect-selector');
+      if (currentLang === 'en') {
+        dialectSelect.value = 'english_worker';
+      } else {
+        dialectSelect.value = 'saudi';
+      }
+    }
+
+    // --- City Presets Data ---
+    const CITIES = {
+      riyadh: { name: 'Riyadh', temp: '46.5°', wbgt: '33.4°', hydration: '1.0 L', danger: true, shelter: 'مركز الرعاية الصحية الأولية بالبطحاء (24/7)' },
+      cairo: { name: 'Cairo', temp: '39.0°', wbgt: '29.8°', hydration: '0.75 L', danger: false, shelter: 'مستشفى شبرا العام - قسم الطوارئ (24/7)' },
+      jeddah: { name: 'Jeddah', temp: '41.0°', wbgt: '31.5°', hydration: '1.0 L', danger: true, shelter: 'مركز صحي الرويس - عيادة الطوارئ' },
+      dammam: { name: 'Dammam', temp: '45.0°', wbgt: '32.8°', hydration: '1.0 L', danger: true, shelter: 'مركز صحي الدمام المركزي' },
+      alexandria: { name: 'Alexandria', temp: '33.0°', wbgt: '26.4°', hydration: '0.5 L', danger: false, shelter: 'مستشفى كرموز للتأمين الصحي' },
+    };
+
+    function switchCity(cityKey) {
+      document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const data = CITIES[cityKey];
+      if (!data) return;
+
+      document.getElementById('city-badge').innerText = data.name;
+      document.getElementById('v-temp').innerText = data.temp;
+      document.getElementById('v-wbgt').innerText = data.wbgt;
+      document.getElementById('v-hydration').innerText = data.hydration;
+      document.getElementById('v-shelter-name').innerText = data.shelter;
+
+      const banner = document.getElementById('v-banner');
+      if (data.danger) {
+        banner.className = 'hazard-banner extreme';
+        banner.innerHTML = `<span>⚠️</span><div>${currentLang === 'ar' ? '<strong>إنذار حراري شديد:</strong> مؤشر الإجهاد الحراري خطير. يمنع العمل الشاق تحت الشمس.' : '<strong>SEVERE HEAT STRESS:</strong> Dangerous conditions. Cease heavy manual labor.'}</div>`;
+      } else {
+        banner.className = 'hazard-banner moderate';
+        banner.innerHTML = `<span>⚡</span><div>${currentLang === 'ar' ? '<strong>إجهاد حراري معتدل:</strong> يلزم العمل 45 دقيقة مع راحة 15 دقيقة في الظل.' : '<strong>MODERATE HEAT STRESS:</strong> 45m work / 15m rest cycle in shaded areas.'}</div>`;
+      }
+    }
+
+    // --- Fast Medication Checking ---
+    function quickCheck(drugName) {
+      document.getElementById('drug-input').value = drugName;
+      verifyDrug();
+    }
+
+    async function verifyDrug() {
+      const drug = document.getElementById('drug-input').value.trim();
+      if (!drug) return;
+
+      const card = document.getElementById('drug-result');
+      card.style.display = 'block';
+
+      try {
+        const res = await fetch(`/api/medication?drug=${encodeURIComponent(drug)}&asthma=true`);
+        const data = await res.json();
+
+        if (data.contraindication_level === 'LETHAL_CONTRAINDICATION') {
+          card.style.background = 'var(--red-surface)';
+          card.style.border = '1px solid var(--red)';
+          card.innerHTML = `
+            <div style="color: #f87171; font-weight: 700; margin-bottom: 0.25rem;">⛔ ${data.alert_title}</div>
+            <div style="color: #fecaca; margin-bottom: 0.35rem;">${data.clinical_rationale}</div>
+            <div style="color: #a7f3d0;"><strong>${currentLang === 'ar' ? 'البديل الآمن:' : 'Safe Alternative:'}</strong> ${data.safe_alternative}</div>
+          `;
+        } else if (data.is_safe_for_patient) {
+          card.style.background = 'var(--teal-surface)';
+          card.style.border = '1px solid var(--teal)';
+          card.innerHTML = `
+            <div style="color: #5eead4; font-weight: 700; margin-bottom: 0.25rem;">✅ ${data.drug_name} (${data.category_label})</div>
+            <div style="color: #ccfbf1; font-size: 0.78rem;">${data.technique_guideline}</div>
+          `;
+        } else {
+          card.style.background = 'var(--amber-surface)';
+          card.style.border = '1px solid var(--amber)';
+          card.innerHTML = `<div style="color: #fde68a;">${data.action_required}</div>`;
+        }
+      } catch (e) {
+        card.innerHTML = `<div style="color: #f87171;">Error checking drug.</div>`;
+      }
+    }
+
+    // --- Markdown Simple Formatter ---
+    function formatMarkdown(text) {
+      if (!text) return '';
+      let escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Headers ###
+      escaped = escaped.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+      escaped = escaped.replace(/^## (.*$)/gim, '<h3>$1</h3>');
+
+      // Bold **text**
+      escaped = escaped.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+
+      // Bullet points • or -
+      escaped = escaped.replace(/^\s*[-•]\s+(.*$)/gim, '<li>$1</li>');
+      escaped = escaped.replace(/(<li>.*<\/li>)/gim, '<ul>$1</ul>');
+      escaped = escaped.replace(/<\/ul>\s*<ul>/gim, '');
+
+      // Highlight Emergency Numbers (997, 123, 937)
+      escaped = escaped.replace(/\b(997|123|937|911)\b/g, '<span style="background:#dc2626; color:white; padding:1px 5px; border-radius:3px; font-weight:700;">$1</span>');
+
+      // Newlines
+      escaped = escaped.replace(/\n\n+/g, '</p><p>');
+      escaped = escaped.replace(/\n/g, '<br>');
+
+      return `<p>${escaped}</p>`;
+    }
+
+    // --- Multi-Agent Chat Execution ---
+    function handleTextareaKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+
+    async function sendMessage(overrideText = null) {
+      const textarea = document.getElementById('user-input');
+      const text = overrideText || textarea.value.trim();
+      if (!text) return;
+
+      const chatBox = document.getElementById('chat-messages');
+      const dialect = document.getElementById('dialect-selector').value;
+
+      // Append user row
+      const userRow = document.createElement('div');
+      userRow.className = 'message-row user';
+      userRow.innerHTML = `
+        <div class="msg-header">
+          <span>👤</span>
+          <span>${currentLang === 'ar' ? 'المستفيد' : 'USER'}</span>
+        </div>
+        <div class="msg-bubble">${text.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</div>
+      `;
+      chatBox.appendChild(userRow);
+      if (!overrideText) textarea.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Active swarm stage chips animation
+      document.getElementById('stage-climate').classList.add('active');
+      document.getElementById('stage-clinical').classList.add('active');
+
+      // Loading bubble
+      const loadingRow = document.createElement('div');
+      loadingRow.className = 'message-row agent';
+      loadingRow.id = 'active-loading-row';
+      loadingRow.innerHTML = `
+        <div class="msg-header">
+          <span>⏳</span>
+          <span>STRANDS AGENTS SWARM REASONING...</span>
+        </div>
+        <div class="msg-bubble" style="color: var(--text-secondary);">
+          ${currentLang === 'ar' ? 'جاري الفرز واستدعاء نماذج Bedrock والوكلاء المتخصصين...' : 'Triaging inquiry across climate & clinical specialist agents...'}
+        </div>
+      `;
+      chatBox.appendChild(loadingRow);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const t0 = performance.now();
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: text,
+            session_id: 'web_session_prod',
+            dialect: dialect
+          })
+        });
+
+        const data = await response.json();
+        const latency = Math.round(performance.now() - t0);
+
+        if (document.getElementById('active-loading-row')) {
+          chatBox.removeChild(loadingRow);
+        }
+
+        // Reset stage chips
+        document.getElementById('stage-climate').classList.remove('active');
+        document.getElementById('stage-clinical').classList.remove('active');
+
+        const agentRow = document.createElement('div');
+        const isEmergency = data.status === 'EMERGENCY_DISPATCH_TRIGGERED';
+        agentRow.className = `message-row agent ${isEmergency ? 'emergency' : ''}`;
+
+        let roleBadge = isEmergency 
+          ? '🚨 CRITICAL RED-FLAG DISPATCH (FAIL-CLOSED)' 
+          : `🤖 NAFAS MULTI-AGENT SWARM (${latency}ms)`;
+
+        agentRow.innerHTML = `
+          <div class="msg-header">
+            <span>${isEmergency ? '🚨' : '🛡️'}</span>
+            <span>${roleBadge}</span>
+          </div>
+          <div class="msg-bubble">${formatMarkdown(data.response || data.error)}</div>
+        `;
+
+        chatBox.appendChild(agentRow);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+      } catch (err) {
+        if (document.getElementById('active-loading-row')) {
+          chatBox.removeChild(loadingRow);
+        }
+        const errRow = document.createElement('div');
+        errRow.className = 'message-row agent emergency';
+        errRow.innerHTML = `
+          <div class="msg-header"><span>⚠️</span><span>CONNECTION ERROR</span></div>
+          <div class="msg-bubble">Error: ${err.message}</div>
+        `;
+        chatBox.appendChild(errRow);
+      }
+    }
+
+    // --- Presets Handlers ---
+    function runPreset(idx) {
+      if (idx === 1) {
+        if (currentLang === 'en') {
+          sendMessage("I work outdoor parcel delivery in Riyadh, ambient temp is 46.5°C under direct sun. What is my mandatory work-rest schedule and required hydration per hour?");
+        } else {
+          document.getElementById('dialect-selector').value = 'saudi';
+          sendMessage("أنا شغال دليفري في الرياض والحرارة 46 مئوية وتحت الشمس، كم وقت الراحة المطلوب وكم لازم أشرب موية؟");
+        }
+      } else if (idx === 2) {
+        if (currentLang === 'en') {
+          sendMessage("My 8-year-old son has diagnosed asthma and has a high fever. Can I safely give him Brufen (Ibuprofen) to lower the fever?");
+        } else {
+          document.getElementById('dialect-selector').value = 'egyptian';
+          sendMessage("ابني عنده 8 سنين وعنده ربو وعنده سخونية، هل ينفع أديله بروفين عشان تنزل الحرارة؟");
+        }
+      } else if (idx === 3) {
+        if (currentLang === 'en') {
+          sendMessage("Emergency: The child has blue lips, severe rib retractions, and cannot talk!");
+        } else {
+          document.getElementById('dialect-selector').value = 'saudi';
+          sendMessage("الولد شفايفه زرقاء ومش قادر يتنفس وخلاص بيغمى عليه الحقونا!");
+        }
+      } else if (idx === 4) {
+        if (currentLang === 'en') {
+          sendMessage("The doctor prescribed Pulmicort inhaler for daily use. Should I use it during a sudden suffocating asthma attack, and what is the proper mouth hygiene technique?");
+        } else {
+          document.getElementById('dialect-selector').value = 'saudi';
+          sendMessage("الدكتور كتبلي بخاخ بولميكورت، هل استخدمه وقت كتمة النفس المفاجئة وكيف طريقة استخدامه الصحيحة؟");
+        }
+      }
+    }
+  </script>
+</body>
+</html>
